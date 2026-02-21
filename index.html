@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lì Xì Thân Hữu 2026</title>
+    <title>Lì Xì</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --red: #d63031;
@@ -11,12 +14,13 @@
             --bg: #fff5f5;
         }
         body {
-            font-family: 'Segoe UI', Tahoma, sans-serif;
+            font-family: 'Quicksand', sans-serif;
             background-color: var(--bg);
             margin: 0;
             display: flex;
             justify-content: center;
             min-height: 100vh;
+            color: #2d3436;
         }
         .container {
             width: 100%;
@@ -24,11 +28,30 @@
             padding: 20px;
             text-align: center;
         }
-        h1 { color: var(--red); margin-bottom: 5px; }
-        #msg { color: #636e72; font-style: italic; margin-bottom: 20px; min-height: 1.2em; }
+        h1 { 
+            font-family: 'Dancing Script', cursive; 
+            color: var(--red); 
+            margin-bottom: 10px;
+            font-size: 2rem;
+        }
+        #msg { color: #636e72; font-weight: 600; margin-bottom: 20px; min-height: 1.2em; }
 
         .screen { display: none; }
         .active { display: block; }
+
+        .intro-text {
+            margin: 60px auto 40px auto;
+            max-width: 90%;
+            background: #fffcfc;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(214, 48, 49, 0.1);
+            border: 2px solid #fff5f5;
+            position: relative;
+        }
+        .intro-text p {
+            margin: 10px 0;
+        }
 
         /* Setup Screen */
         .box {
@@ -105,15 +128,41 @@
             z-index: 100;
         }
         .modal-content {
-            background: white; width: 80%; max-width: 350px;
-            padding: 30px; border-radius: 20px; text-align: center;
+            background: white; width: 90%; max-width: 400px;
+            padding: 25px 15px; border-radius: 20px; text-align: center;
             border: 5px solid var(--gold); animation: popDown 0.4s ease;
         }
         @keyframes popDown {
             from { transform: scale(0.5); opacity: 0; }
             to { transform: scale(1); opacity: 1; }
         }
-        .prize-text { font-size: 2.2rem; margin: 20px 0; color: var(--red); font-weight: 800; }
+        .modal-content h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.4rem;
+            margin: 0 0 15px 0;
+            color: var(--red);
+        }
+        .modal-content p {
+            font-size: 0.95rem;
+            margin: 10px 0;
+            line-height: 1.5;
+        }
+        @media (max-width: 400px) {
+            .modal-content h2 { font-size: 1rem; }
+            .modal-content { padding: 20px; width: 85%; }
+        }
+        .prize-wrap {
+            margin: 15px 0;
+            text-align: center;
+            line-height: 1.4;
+        }
+        .prize-text {
+            font-size: 1.8rem;
+            color: var(--red);
+            font-weight: 800;
+            word-break: break-word;
+        }
+        .sparkle { font-size: 1.5rem; color: var(--gold); }
     </style>
 </head>
 <body>
@@ -134,19 +183,24 @@
     </div>
 
     <div id="play-screen" class="screen">
-        <h1>🧧 Lượm Quà Đi Chờ Chi!</h1>
-        <p id="msg">Bạn chỉ được chọn duy nhất một bao thôi đó!</p>
+        <div class="intro-text">
+            <p>🌸 Xuân vừa ghé cửa, mang theo một nhành may mắn và rất nhiều điều dễ thương…</p>
+            <p>Châu hãy chọn cho mình một chiếc lì xì xinh xinh để lấy hên đầu năm nha 💕</p>
+        </div>
         <div id="envelope-grid" class="grid"></div>
     </div>
 </div>
 
 <div id="modal" class="modal-overlay">
     <div class="modal-content">
-        <h2>🎉 Chúc Mừng!</h2>
-        <p>Phần quà của bạn là:</p>
-        <div class="prize-text" id="modal-prize"></div>
-        <p>Năm mới vui vẻ, vạn sự như ý!</p>
-        <button onclick="closeModal()" style="background:var(--red); color:white; border:none; padding:10px 20px; border-radius:10px; font-weight:bold; cursor:pointer;">Tuyệt vời</button>
+        <h2>🌸 CHÚC MỪNG NĂM MỚI 2026! 🌸</h2>
+        <p>Một chút yêu thương đầu năm dành cho em:</p>
+        <div class="prize-wrap">
+            <span class="sparkle">✨</span>
+            <span class="prize-text" id="modal-prize"></span>
+            <span class="sparkle">✨</span>
+        </div>
+        <p>Chúc em một năm mới thật dịu dàng và rực rỡ nha.💖</p>
     </div>
 </div>
 
@@ -205,7 +259,6 @@
                     setTimeout(() => {
                         document.getElementById('modal-prize').innerText = prize;
                         document.getElementById('modal').style.display = 'flex';
-                        document.getElementById('msg').innerText = "Đây là quà của bạn! 🧧";
                     }, 700);
                 } else if (chosenIndex === index) {
                     // Nếu bấm lại chính bao đã mở thì cho phép úp/mở lại
